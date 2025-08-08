@@ -13,7 +13,12 @@ public class ScoreTransformer : MonoBehaviour
 
     private void Start()
     {
-        _distance = _count * _scale;
+        _distance = GetScore(_count);
         Debug.Log("SCORE" + _distance + " KM");
+    }
+
+    public float GetScore(float count)
+    {
+        return count * _scale;
     }
 }
