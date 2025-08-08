@@ -1,20 +1,29 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class TImer : MonoBehaviour
+class TImer : MonoBehaviour
 {
-    public static event Action TimeUp;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]UnityEvent _event;
+    [SerializeField] private float _count = 15f;
+    [SerializeField] private bool _timeActiv = false;
+
+
+     void TimeStar()
     {
-        
+        _timeActiv = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (_timeActiv)
+        {
+            _count -= Time.deltaTime;
+            if (_count <= 0)
+            {
+                _timeActiv=false;
+                _event?.Invoke();
+            }
+        }
     }
 }
