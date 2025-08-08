@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-class TImer : MonoBehaviour
+public class Timer : MonoBehaviour
 {
     [SerializeField]UnityEvent _event;
     [SerializeField] private float _count = 15f;
     [SerializeField] private bool _timeActiv = false;
 
 
-     void TimeStar()
+    public void TimeStar()
     {
         _timeActiv = true;
     }
