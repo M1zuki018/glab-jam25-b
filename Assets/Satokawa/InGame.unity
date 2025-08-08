@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 269077545}
+  counter: {fileID: 269077547}
 --- !u!114 &269077547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,9 +306,6 @@ MonoBehaviour:
   leftKeys: 61000000730000006400000066000000
   rightKeys: 6a0000006b0000006c0000003b000000
   totalCount: 0
-  lastSide: 0
-  prevLeftAll: 0
-  prevRightAll: 0
 --- !u!1 &693153945
 GameObject:
   m_ObjectHideFlags: 0
