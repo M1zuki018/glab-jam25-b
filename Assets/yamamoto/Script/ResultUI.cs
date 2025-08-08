@@ -1,27 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResultUI : MonoBehaviour
 {
-    [Header("スコアテキスト")]
+    [Header("番付テキスト")]
     [SerializeField] TextMeshProUGUI scoreText;
 
-    [Header("評価")]
-    [SerializeField] TextMeshProUGUI evaluationText;
+    [Header("矢印")]
+    [SerializeField] Image arrow;
 
-    private int score;
-    private string evaluation;
+    [Header("ハイスコアポジション")]
+    [SerializeField] Transform[] pos;
+
+    [Header("距離に応じた判定の値")]
+    [SerializeField] int[] judgment;
+
+    [Header("番付")]
+    [SerializeField] string[] rankingName;
+
+    [Header("UIアニメーションの詳細")]
+    [Header("縮小")] [SerializeField]float reduction;
+    [Header("拡大")] [SerializeField]float expansion;
+    [Header("アニメーション時間")] [SerializeField]float time;
+
+    public int score;
+
+    private bool isJudgment;
 
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = $"Score  :  {score}";
+        //距離に応じた番付の判定
+        for(int i = 0; i < judgment.Length; i++)
+        {
+            if(score >= judgment[i] && !isJudgment)
+            {
+                arrow.transform.DOMove(new Vector3(pos[i].position.x, pos[i].position.y, pos[i].position.z), 1f).SetEase(Ease.OutBounce);
 
-        //評価基準の処理か評価された値をテキストに入れる
-        evaluationText.text = $"{evaluation}";
+                Sequence sequence = DOTween.Sequence();
+                sequence.Append(
+                    scoreText.transform.DOScale(new Vector3(reduction, reduction, reduction), time).SetEase(Ease.InQuint)
+                    );
+                sequence.Append(
+                    scoreText.transform.DOScale(new Vector3(expansion, expansion, expansion), time).SetEase (Ease.OutQuint)
+                    );
+                scoreText.text = rankingName[i];
 
-        SoundManager.instance.SoundPlay("あ");
+                isJudgment = true;
+            }
+        }
     }
 }
