@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class ScoreTransformer : MonoBehaviour
 {
+    [Header("変換倍率(回数→KM)")]
     [SerializeField] float _scale;
-    public float _count; // 受け取る変数
-    float _distance; // 結果用の箱
-    /// <summary>
-    /// scoreTransformer._count = 作ってもらった変数;　このセットはどっちのコードでも行けるように
-    /// </summary>
 
     private void Start()
     {
-        _distance = GetScore(_count);
-        Debug.Log("SCORE" + _distance + " KM");
+        var debugCount = 30;
+        var distance = GetScore(debugCount);
+        Debug.Log("SCORE " + distance + " KM");
     }
 
     public float GetScore(float count)
