@@ -9,8 +9,9 @@ public class Timer : MonoBehaviour
     [SerializeField] private bool _timeActiv = false;
 
 
-    public void TimeStar()
+    public void TimeStart(int count)
     {
+        _count = count;
         _timeActiv = true;
     }
 
@@ -21,6 +22,7 @@ public class Timer : MonoBehaviour
             _count -= Time.deltaTime;
             if (_count <= 0)
             {
+                Debug.Log("Stop");
                 _timeActiv=false;
                 _event?.Invoke();
             }
