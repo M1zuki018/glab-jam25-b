@@ -6,21 +6,19 @@ using UnityEngine;
 [RequireComponent (typeof(CircleCollider2D))]
 public class CharacterImpulse : MonoBehaviour
 {
-    Rigidbody2D _rb;
     Transform _tr;
     int _getKeyCount;
     bool _isCommandSuccess;
     float _characterSize;
-    Vector2 _force;
 
     [SerializeField]
     KeyInputCounter _kIC;
     [SerializeField]
     int _mustGetKeyNumber;
+    int _enemyPosition;
     // Start is called before the first frame update
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
         _tr = transform;
         _kIC = GetComponent<KeyInputCounter>();
         _getKeyCount = _kIC.TotalCount;
@@ -39,7 +37,11 @@ public class CharacterImpulse : MonoBehaviour
         }
         else if(_getKeyCount >= 150 && _isCommandSuccess)
         {
-
+            for(int j = 0; j > _getKeyCount; j++)
+            {
+                _enemyPosition += 1;
+            }
+            _tr.position = new Vector2(_enemyPosition,_enemyPosition);
         }
     }
 }
