@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameStart : MonoBehaviour
 {
     // 複数のUIパネルをInspectorで設定できるように、GameObjectのリストを使用
     public List<GameObject> _uiPanels;
     [SerializeField] float _displayTime = 3.0f;
+    [SerializeField] UnityEvent _gameStart;
 
     void Start()
     {
@@ -43,5 +45,8 @@ public class GameStart : MonoBehaviour
                 panel.SetActive(false);
             }
         }
+
+        // 全てのUIパネルの非表示処理が完了した後にイベントを呼び出す
+        _gameStart.Invoke();
     }
 }
