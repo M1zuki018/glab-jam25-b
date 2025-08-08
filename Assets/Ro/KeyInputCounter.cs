@@ -5,16 +5,16 @@ public class KeyInputCounter : MonoBehaviour
 {
     [Header("左手4キー")]
     // 左手側の入力として使うキー（4つ全て同時押しで1ステップ扱い）
-    public KeyCode[] leftKeys = { KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F };
-
-    [Header("右手4キー")]
+    [SerializeField] private KeyCode[] leftKeys = { KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F };
     
-    public KeyCode[] rightKeys = { KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.Semicolon };
+    [Header("右手4キー")]
+
+    [SerializeField] private KeyCode[] rightKeys = { KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.Semicolon };
 
 
     [Header("カウント結果")]
     // 現在の累計カウント
-    public int totalCount;
+    [SerializeField] private int totalCount;
 
 
     // どちらの側で最後にカウントしたかを示す列挙型
