@@ -21,5 +21,7 @@ public class ResultUI : MonoBehaviour
 
         //評価基準の処理か評価された値をテキストに入れる
         evaluationText.text = $"{evaluation}";
+
+        SoundManager.instance.SoundPlay("あ");
     }
 }
