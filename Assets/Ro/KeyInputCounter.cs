@@ -16,6 +16,8 @@ public class KeyInputCounter : MonoBehaviour
     // 現在の累計カウント
     [SerializeField] private int totalCount;
 
+    public int TotalCount => totalCount;
+
 
     // どちらの側で最後にカウントしたかを示す列挙型
     private enum Side { None, Left, Right }
