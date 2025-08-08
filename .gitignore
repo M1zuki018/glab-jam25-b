@@ -101,5 +101,4 @@ InitTestScene*.unity*
 
 Assets/TextMesh Pro/
 Assets/TextMesh Pro.meta
-Assets/Ignore/DOTween/Editor/Imgs/Header.jpg.meta
-Assets/Ignore/
+Assets/Plugins*
