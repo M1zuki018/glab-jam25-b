@@ -521,7 +521,7 @@ MonoBehaviour:
   commandInput: {fileID: 1632233995}
   resultUI: {fileID: 6727697045594120513}
   keyTime: 10
-  soundObject: {fileID: 3389795258416532662, guid: d8cbf107530bb9d4783bae39ddee8193, type: 3}
+  soundObject: {fileID: 3389795258416532662, guid: c7e7e12ba61a69b44b5b1a60525f24b7, type: 3}
 --- !u!114 &269077547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2017,7 +2017,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: c4198c56aae4ac74da97c9c717df4d92, type: 3}
     m_FontSize: 20
     m_FontStyle: 1
     m_BestFit: 0
@@ -2677,7 +2677,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: c4198c56aae4ac74da97c9c717df4d92, type: 3}
     m_FontSize: 20
     m_FontStyle: 1
     m_BestFit: 0
