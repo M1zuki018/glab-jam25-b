@@ -89,6 +89,7 @@ public class CharacterImpulse : MonoBehaviour
         }
         else if (getKeyCount >= _blowoffCount && isCommandSuccess)
         {
+            Instantiate(_obj, endPosition, Quaternion.identity);
             _getSprite.sprite = _sprites[2];
             FindAnyObjectByType<SoundManager>().SoundPlay("•Ç“Ë‚«”²‚¯");
             criticalHit.HitEffect(true);

@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class ResultUI : MonoBehaviour
 {
+    [Header("参照")]
+    [SerializeField] GameObject obj;
+    [Header("吹っ飛ぶか吹っ飛ばないかの単位")]
+    [SerializeField] int toFly;
+    [SerializeField] int notFlying;
+
     [Header("UIオブジェクト")]
     [SerializeField] GameObject resultObject;
     [Header("距離テキスト")]
@@ -16,6 +22,7 @@ public class ResultUI : MonoBehaviour
     [Header("ハイスコアポジション")]
     [SerializeField] float posY;
     [SerializeField] float posX;
+    [SerializeField] Transform[] pos;
 
     [Header("距離に応じた判定の値")]
     [SerializeField] int[] judgment;
@@ -50,7 +57,10 @@ public class ResultUI : MonoBehaviour
         {
             if (score >= judgment[i]&& !isJudgment)
             {
-                arrow.transform.DOMoveY(491f * i,1f).SetEase(Ease.OutBounce);
+                //arrow.transform.DOMoveY(491f * i,1f).SetEase(Ease.OutBounce);
+
+                //追加
+                arrow.transform.DOMove(pos[i].position, 1f).SetEase(Ease.OutBounce);
 
                 Sequence sequence = DOTween.Sequence();
                 sequence.Append(
@@ -59,7 +69,25 @@ public class ResultUI : MonoBehaviour
                 sequence.Append(
                     showRankingImage.transform.DOScale(new Vector3(expansion_x, expansion_y, 0), time).SetEase(Ease.OutQuint)
                     );
-                scoreText.text = score + "km";
+                //scoreText.text = score + "km";
+
+                var count = obj.GetComponent<KeyInputCounter>().TotalCount;
+                if(count >= toFly)
+                {
+                    scoreText.text = $"{count} 里" + "KM";
+                    Debug.Log("距離");
+                }
+                else if(count >= notFlying)
+                {
+                    scoreText.text = $"{count} 尺" + "M";
+                    Debug.Log("距離");
+                }
+                else
+                {
+                    scoreText.text = $"{count} 寸";
+                    Debug.Log("距離");
+                }
+
                 isJudgment = true;
 
                 //番付表示
