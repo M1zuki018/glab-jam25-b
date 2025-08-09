@@ -31,6 +31,8 @@ public class CharacterImpulse : MonoBehaviour
     [SerializeField]
     private Vector3 endPosition;
 
+    private Vector3 star;
+
     [SerializeField, Header("リザルト処理")]
     private UnityEvent resultEvent;
 
@@ -38,7 +40,7 @@ public class CharacterImpulse : MonoBehaviour
     private Sprite[] _sprites;
 
     [SerializeField, Header("きらーんのオブジェクト")]
-    private GameObject _obj;
+    private GameObject _starSprite;
 
     [SerializeField, Header("きらーんの時間")]
     private float _direction;
@@ -54,9 +56,11 @@ public class CharacterImpulse : MonoBehaviour
     private bool isAnim = false;
     public void Start()
     {
+        _starSprite.SetActive(false);
         _getSprite = gameObject.GetComponent<SpriteRenderer>();
         criticalHit = FindAnyObjectByType<CriticalHit>();
         _animator = GetComponent<Animator>();
+
     }
 
     private void Update()
@@ -89,7 +93,6 @@ public class CharacterImpulse : MonoBehaviour
         }
         else if (getKeyCount >= _blowoffCount && isCommandSuccess)
         {
-            Instantiate(_obj, endPosition, Quaternion.identity);
             _getSprite.sprite = _sprites[2];
             FindAnyObjectByType<SoundManager>().SoundPlay("壁突き抜け");
             criticalHit.HitEffect(true);
@@ -106,9 +109,22 @@ public class CharacterImpulse : MonoBehaviour
             Vector3 rote = smouPerson.transform.eulerAngles;
             rote.z -= 200;
             smouPerson.transform.DORotate(rote, duration).SetDelay(delay);
-            smouPerson.transform.DOMove(endPosition, duration).SetDelay(delay);
-            _obj.transform.DOScale(new Vector3(1, 1, 1), duration).SetDelay(_direction)
-                .OnComplete(resultEvent.Invoke);
+            smouPerson.transform.DOMove(endPosition, duration).SetDelay(delay)
+           .OnComplete(() =>
+           {
+               _starSprite.SetActive(true);
+               if (_starSprite.TryGetComponent<SpriteRenderer>(out var spriteRenderer))
+               {
+                   var c = spriteRenderer.color;
+                   c.a = 0f;
+                   spriteRenderer.color = c;
+
+                   spriteRenderer.DOFade(1, 0.3f)
+                   .OnComplete(resultEvent.Invoke);
+               }
+           });
+
+            //Destroy(this.gameObject, delay);
         }
         else
         {
