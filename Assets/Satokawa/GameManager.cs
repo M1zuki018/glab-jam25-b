@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         timer.TimeStart(keyTime);
         counter.enabled = true;
         counter.ResetCount();
+        commandInput.enabled = true;
         commandInput.RandomCommand();
         commandInput.ApplySplitColor();
         isKey = true;
@@ -69,7 +70,16 @@ public class GameManager : MonoBehaviour
         counter.enabled = false;
         counter.PushRightHand();
         isKey = false;
-        characterImpulse.SmouMove(counter.TotalCount, isCommand);
+        commandInput.enabled = false;
+        if(isCommand)
+        {
+            characterImpulse.SmouMove(counter.TotalCount, isCommand);
+        }
+        else
+        {
+            characterImpulse.SmouMove(0, isCommand);
+        }
+        
     }
     public void result()
     {
