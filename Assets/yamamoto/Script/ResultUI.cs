@@ -7,8 +7,6 @@ public class ResultUI : MonoBehaviour
 {
     [Header("UIオブジェクト")]
     [SerializeField] GameObject resultObject;
-    [Header("番付テキスト")]
-    [SerializeField] TextMeshProUGUI rankingNameText;
     [Header("距離テキスト")]
     [SerializeField] TextMeshProUGUI scoreText;
 
