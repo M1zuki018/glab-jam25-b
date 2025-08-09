@@ -30,7 +30,7 @@ public class CommandInput : MonoBehaviour
         if (isActive)
         {
             
-            if (textIndex >= command.Length -1)
+            if (textIndex >= command.Length && Input.GetKeyDown(KeyCode.Return))
             {
                 isActive = false;
                 _isCommandInput = true;
@@ -48,7 +48,7 @@ public class CommandInput : MonoBehaviour
             }
         }
         commandText.gameObject.SetActive(isActive);
-        enterImage.gameObject.SetActive(false);
+        enterImage.gameObject.SetActive(isActive);
     }
     public void RandomCommand(int length = 4)
     {
