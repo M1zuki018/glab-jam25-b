@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class ResultUI : MonoBehaviour
 {
+    [Header("参照")]
+    [SerializeField] GameObject obj;
+    [Header("吹っ飛ぶか吹っ飛ばないかの単位")]
+    [SerializeField] int toFly;
+    [SerializeField] int notFlying;
+
     [Header("UIオブジェクト")]
     [SerializeField] GameObject resultObject;
     [Header("距離テキスト")]
@@ -59,7 +65,25 @@ public class ResultUI : MonoBehaviour
                 sequence.Append(
                     showRankingImage.transform.DOScale(new Vector3(expansion_x, expansion_y, 0), time).SetEase(Ease.OutQuint)
                     );
-                scoreText.text = score + "km";
+                //scoreText.text = score + "km";
+
+                var count = obj.GetComponent<KeyInputCounter>().TotalCount;
+                if(count >= toFly)
+                {
+                    scoreText.text = $"{count} 里" + "KM";
+                    Debug.Log("距離");
+                }
+                else if(count >= notFlying)
+                {
+                    scoreText.text = $"{count} 尺" + "M";
+                    Debug.Log("距離");
+                }
+                else
+                {
+                    scoreText.text = $"{count} 寸";
+                    Debug.Log("距離");
+                }
+
                 isJudgment = true;
 
                 //番付表示
