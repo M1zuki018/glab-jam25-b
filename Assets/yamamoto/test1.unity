@@ -2264,7 +2264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2200745843258404173
 GameObject:
   m_ObjectHideFlags: 0
@@ -3063,8 +3063,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 269077542}
-  toFly: 200
-  notFlying: 50
+  toFly: 20
+  notFlying: 5
   resultObject: {fileID: 2050490699258280993}
   scoreText: {fileID: 627920543743775375}
   arrow: {fileID: 7929542246714567307}

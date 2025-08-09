@@ -20,8 +20,6 @@ public class ResultUI : MonoBehaviour
     [SerializeField] Image arrow;
 
     [Header("ハイスコアポジション")]
-    [SerializeField] float posY;
-    [SerializeField] float posX;
     [SerializeField] Transform[] pos;
 
     [Header("距離に応じた判定の値")]
@@ -57,9 +55,6 @@ public class ResultUI : MonoBehaviour
         {
             if (score >= judgment[i]&& !isJudgment)
             {
-                //arrow.transform.DOMoveY(491f * i,1f).SetEase(Ease.OutBounce);
-
-                //追加
                 arrow.transform.DOMove(pos[i].position, 1f).SetEase(Ease.OutBounce);
 
                 Sequence sequence = DOTween.Sequence();
@@ -69,17 +64,28 @@ public class ResultUI : MonoBehaviour
                 sequence.Append(
                     showRankingImage.transform.DOScale(new Vector3(expansion_x, expansion_y, 0), time).SetEase(Ease.OutQuint)
                     );
-                //scoreText.text = score + "km";
-
+                
                 var count = obj.GetComponent<KeyInputCounter>().TotalCount;
                 if(count >= toFly)
                 {
-                    scoreText.text = $"{count} 里" + "KM";
+                    float dis = 0;
+                    for(int c = 0; c < count; c++)
+                    {
+                        dis += 3.9373f;
+                    }
+
+                    scoreText.text = $"{count} 里" + $"{dis} KM";
                     Debug.Log("距離");
                 }
                 else if(count >= notFlying)
                 {
-                    scoreText.text = $"{count} 尺" + "M";
+                    float dis = 0;
+                    for (int c = 0; c < count; c++)
+                    {
+                        dis += 0.30303f;
+                    }
+
+                    scoreText.text = $"{count} 尺" + $"{dis} M";
                     Debug.Log("距離");
                 }
                 else
