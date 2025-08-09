@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         counter.enabled = false;
         isKey = false;
 #if UNITY_EDITOR
-        if(FindAnyObjectByType<SoundManager>() == null)
+        if (FindAnyObjectByType<SoundManager>() == null)
         {
             Instantiate(soundObject);
         }
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         timer.TimeStart(keyTime);
         counter.enabled = true;
         counter.ResetCount();
+        commandInput.enabled = true;
         commandInput.RandomCommand();
         commandInput.ApplySplitColor();
         isKey = true;
@@ -69,11 +70,16 @@ public class GameManager : MonoBehaviour
         counter.enabled = false;
         counter.PushRightHand();
         isKey = false;
+        commandInput.enabled = false;
+        if (!isCommand)
+        {
+            counter.TimeUp();
+        }
         characterImpulse.SmouMove(counter.TotalCount, isCommand);
     }
     public void result()
     {
         float score = scoreTransformer.GetScore(counter.TotalCount);
-        DOVirtual.DelayedCall(1, () =>resultUI.ScoreView(score));
+        DOVirtual.DelayedCall(1, () => resultUI.ScoreView(score));
     }
 }

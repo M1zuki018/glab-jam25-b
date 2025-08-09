@@ -114,4 +114,8 @@ public class KeyInputCounter : MonoBehaviour
         rightHand.transform.DOScale(defaultScale / (pushScale * 1.2f), 0.3f)
             .OnComplete(() => rightHand.transform.DOScale(defaultScale, 0.5f).SetDelay(0.5f));
     }
+    public void TimeUp()
+    {
+        totalCount = 0;
+    }
 }
