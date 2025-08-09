@@ -24,6 +24,10 @@ public class KeyInputCounter : MonoBehaviour
     [SerializeField, Header("押した時のスケール")]
     private float pushScale;
 
+    [SerializeField, Header("張り手エフェクト")]
+    private HariteHitEffect hariteFX;
+
+    private Vector3 opponentCenterPos = new Vector3(-0.3f, -0.52f, -4.379f);
     public int TotalCount => totalCount;
 
 
@@ -94,6 +98,8 @@ public class KeyInputCounter : MonoBehaviour
         lastSide = current;              // 今回の側を記録
         totalCount++;                    // カウントを加算
 
+        if (current == Side.Left) PushLeftHand();
+        if (current == Side.Right) PushRightHand();
     }
 
     // カウントと状態をリセット
@@ -108,7 +114,7 @@ public class KeyInputCounter : MonoBehaviour
         leftHand.transform.localScale = defaultScale;
         rightHand.transform.localScale = defaultScale;
     }
-    public void PushRightHand()
+    public void Push()
     {
         FindAnyObjectByType<SoundManager>().SoundPlay("張り手");
         rightHand.transform.DOScale(defaultScale / (pushScale * 1.2f), 0.3f)
@@ -117,5 +123,35 @@ public class KeyInputCounter : MonoBehaviour
     public void TimeUp()
     {
         totalCount = 0;
+    }
+    public void PushLeftHand()
+    {
+        FindAnyObjectByType<SoundManager>()?.SoundPlay("張り手");
+
+        // 相手力士の位置にヒット演出
+        if (hariteFX != null)
+        {
+            var pos = opponentCenterPos;
+            pos.z = hariteFX.transform.position.z;
+            hariteFX.PlayAt(pos);
+        }
+
+        leftHand.transform.DOScale(defaultScale / (pushScale * 1.2f), 0.3f)
+            .OnComplete(() => leftHand.transform.DOScale(defaultScale, 0.5f).SetDelay(0.5f));
+    }
+    public void PushRightHand()
+    {
+        FindAnyObjectByType<SoundManager>().SoundPlay("張り手");
+
+
+        if (hariteFX != null)
+        {
+            var pos = opponentCenterPos;
+            pos.z = hariteFX.transform.position.z;
+            hariteFX.PlayAt(pos);
+        }
+
+        rightHand.transform.DOScale(defaultScale / (pushScale * 1.2f), 0.3f)
+            .OnComplete(() => rightHand.transform.DOScale(defaultScale, 0.5f).SetDelay(0.5f));
     }
 }
