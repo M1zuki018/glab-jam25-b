@@ -56,6 +56,8 @@ MonoBehaviour:
     soundName: "\u52DD\u5229"
   - clip: {fileID: 8300000, guid: 755515573e18a9a4c9b756000317a782, type: 3}
     soundName: "\u6557\u5317"
+  - clip: {fileID: 8300000, guid: 755515573e18a9a4c9b756000317a782, type: 3}
+    soundName: "\u6557\u5317"
   bgmList:
   - clip: {fileID: 8300000, guid: 4d41ab59b3a74fd4d993454042dc1d83, type: 3}
     soundName: "\u30A4\u30F3\u30B2\u30FC\u30E0"

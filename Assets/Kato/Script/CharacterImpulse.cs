@@ -118,7 +118,7 @@ public class CharacterImpulse : MonoBehaviour
                    var c = spriteRenderer.color;
                    c.a = 0f;
                    spriteRenderer.color = c;
-
+                   FindAnyObjectByType<SoundManager>().SoundPlay("ÉLÉâÅ[Éì");
                    spriteRenderer.DOFade(1, 0.3f)
                    .OnComplete(resultEvent.Invoke);
                }
