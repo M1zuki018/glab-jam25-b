@@ -74,7 +74,7 @@ public class ResultUI : MonoBehaviour
                         dis += 3.9373f;
                     }
 
-                    scoreText.text = $"{count} —¢" + $"{dis} KM";
+                    scoreText.text = $"{count} —¢" + $"{dis} km";
                     Debug.Log("‹——£");
                 }
                 else if(count >= notFlying)
@@ -85,7 +85,7 @@ public class ResultUI : MonoBehaviour
                         dis += 0.30303f;
                     }
 
-                    scoreText.text = $"{count} ŽÚ" + $"{dis} M";
+                    scoreText.text = $"{count} ŽÚ" + $"{dis} m";
                     Debug.Log("‹——£");
                 }
                 else
