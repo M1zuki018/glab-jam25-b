@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         FindAnyObjectByType<GameStop>();
         counter.ScaleReset();
         counter.enabled = false;
-        counter.PushRightHand();
+        counter.Push();
         isKey = false;
         commandInput.enabled = false;
         if (!isCommand)

@@ -22,8 +22,8 @@ public class Timer : MonoBehaviour
         if (_timeActive)
         {
             _count -= Time.deltaTime;
-            int displayTime = Mathf.CeilToInt(_count);
-            timerText.text = displayTime.ToString();
+            //int displayTime = Mathf.CeilToInt(_count);
+            timerText.text = "Žc‚è "+ _count.ToString("N1")+" •b";
 
             if (_count <= 0)
             {
