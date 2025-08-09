@@ -1,12 +1,12 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
     [SerializeField][Header("タイマー終了後の処理")] private UnityEvent _event;
-    [SerializeField]  Text timerText;
+    [SerializeField]  TextMeshProUGUI timerText;
     private float _count = 15f;
     private bool _timeActive = false;
 
