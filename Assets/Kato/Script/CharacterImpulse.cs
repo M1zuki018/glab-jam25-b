@@ -7,6 +7,9 @@ using UnityEngine.Events;
 //[RequireComponent(typeof(CircleCollider2D))]
 public class CharacterImpulse : MonoBehaviour
 {
+    [SerializeField, Header("アニメーション時間")]
+    private float duration = 0.5f;
+
     //[SerializeField]
     //int _mustGetKeyNumber;
 
@@ -25,18 +28,47 @@ public class CharacterImpulse : MonoBehaviour
     [SerializeField, Header("動くまでの時間")]
     private float delay;
 
+    [SerializeField]
+    private Vector3 endPosition;
+
     [SerializeField, Header("リザルト処理")]
     private UnityEvent resultEvent;
 
+    [SerializeField, Header("相撲の表情")]
+    private Sprite[] _sprites;
+
+    [SerializeField,Header("きらーんのオブジェクト")]
+    private　GameObject _obj;
+
+    [SerializeField, Header("きらーんの時間")]
+    private float _direction;
+
+    [SerializeField]
+    private KeyInputCounter _inputCount;
+
+    private SpriteRenderer _getSprite;
     private CriticalHit criticalHit;
+    private Animator _animator;
+
+    private int _sumouCount;
     public void Start()
     {
+        _getSprite = gameObject.GetComponent<SpriteRenderer>();
         criticalHit = FindAnyObjectByType<CriticalHit>();
+       _animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        _sumouCount = _inputCount.TotalCount;
+        _animator.SetInteger("SumouCount", _sumouCount);
+        
     }
     public void SmouMove(int getKeyCount,bool isCommandSuccess)
     {
         if ((getKeyCount >= _flyingCount && getKeyCount < _blowoffCount) && isCommandSuccess)
-        {
+        {   
+            _getSprite.sprite = _sprites[1];
             FindAnyObjectByType<SoundManager>().SoundPlay("ぶっ飛ぶ");
             criticalHit.HitEffect(true);
             Debug.Log("a");
@@ -46,11 +78,12 @@ public class CharacterImpulse : MonoBehaviour
             //smouPerson.transform.localScale = new Vector2(characterSize, characterSize);
 
             characterSize -= _flyingScale/10;
-            smouPerson.transform.DOScale(new Vector3(characterSize, characterSize, characterSize),0.5f).SetDelay(delay)
+            smouPerson.transform.DOScale(new Vector3(characterSize, characterSize, characterSize), duration).SetDelay(delay)
                 .OnComplete(resultEvent.Invoke);
         }
         else if (getKeyCount >= _blowoffCount && isCommandSuccess)
         {
+            _getSprite.sprite= _sprites[2];
             FindAnyObjectByType<SoundManager>().SoundPlay("壁突き抜け");
             criticalHit.HitEffect(true);
             //int enemyPosition = (int)smouPerson.transform.position.x;   //なにを入れていいかわからん
@@ -62,15 +95,17 @@ public class CharacterImpulse : MonoBehaviour
 
             float characterSize = smouPerson.transform.localScale.x;
             characterSize -= _flyingScale / 5;
-            smouPerson.transform.DOScale(new Vector3(characterSize, characterSize, characterSize), 0.5f).SetDelay(delay);
+            smouPerson.transform.DOScale(new Vector3(characterSize, characterSize, characterSize), duration).SetDelay(delay);
             Vector3 rote = smouPerson.transform.eulerAngles;
             rote.z -= 200;
-            smouPerson.transform.DORotate(rote, 0.5f).SetDelay(delay);
-            smouPerson.transform.DOMove(new Vector3(10.8199997f, 7.21999979f, 0), 0.5f).SetDelay(delay)
+            smouPerson.transform.DORotate(rote, duration).SetDelay(delay);
+            smouPerson.transform.DOMove(endPosition, duration).SetDelay(delay);
+            _obj.transform.DOScale(new Vector3(1,1,1),duration).SetDelay(_direction)
                 .OnComplete(resultEvent.Invoke);
         }
         else
         {
+            _getSprite.sprite = _sprites[0];
             criticalHit.HitEffect(false);
             DOVirtual.DelayedCall(3, () => resultEvent.Invoke());
             //外す

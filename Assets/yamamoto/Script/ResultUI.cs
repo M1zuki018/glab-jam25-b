@@ -7,8 +7,6 @@ public class ResultUI : MonoBehaviour
 {
     [Header("UIオブジェクト")]
     [SerializeField] GameObject resultObject;
-    [Header("番付テキスト")]
-    [SerializeField] TextMeshProUGUI rankingNameText;
     [Header("距離テキスト")]
     [SerializeField] TextMeshProUGUI scoreText;
 
@@ -16,20 +14,26 @@ public class ResultUI : MonoBehaviour
     [SerializeField] Image arrow;
 
     [Header("ハイスコアポジション")]
-    [SerializeField] float[] posY;
+    [SerializeField] float posY;
     [SerializeField] float posX;
 
     [Header("距離に応じた判定の値")]
     [SerializeField] int[] judgment;
 
     [Header("番付")]
-    [SerializeField] string[] rankingName;
+    [SerializeField] Sprite[] rankingImages;
+    [SerializeField] Image showRankingImage;
 
     [Header("UIアニメーションの詳細")]
-    [Header("縮小")] [SerializeField]float reduction;
-    [Header("拡大")] [SerializeField]float expansion;
-    [Header("アニメーション時間")] [SerializeField]float time;
+    [Header("縮小")]
+    [SerializeField] float reduction_x;
+    [SerializeField] float reduction_y;
 
+    [Header("拡大比率")] 
+    [SerializeField] float expansion_x;
+    [SerializeField] float expansion_y;
+
+    [Header("アニメーション時間")] [SerializeField]float time;
 
     private bool isJudgment;
 
@@ -46,18 +50,21 @@ public class ResultUI : MonoBehaviour
         {
             if (score >= judgment[i]&& !isJudgment)
             {
-                arrow.transform.DOMoveY(posY[i],1f).SetEase(Ease.OutBounce);
+                arrow.transform.DOMoveY(491f * i,1f).SetEase(Ease.OutBounce);
 
                 Sequence sequence = DOTween.Sequence();
                 sequence.Append(
-                    rankingNameText.transform.DOScale(new Vector3(reduction, reduction, reduction), time).SetEase(Ease.InQuint)
+                    showRankingImage.transform.DOScale(new Vector3(reduction_x, reduction_y, 0), time).SetEase(Ease.InQuint)
                     );
                 sequence.Append(
-                    rankingNameText.transform.DOScale(new Vector3(expansion, expansion, expansion), time).SetEase(Ease.OutQuint)
+                    showRankingImage.transform.DOScale(new Vector3(expansion_x, expansion_y, 0), time).SetEase(Ease.OutQuint)
                     );
-                rankingNameText.text = rankingName[i];
                 scoreText.text = score + "km";
                 isJudgment = true;
+
+                //番付表示
+                showRankingImage.sprite = rankingImages[i];
+                Debug.Log("番付表示");
             }
         }
     }
