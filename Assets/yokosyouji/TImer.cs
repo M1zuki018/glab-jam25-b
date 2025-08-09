@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
         if (_timeActive)
         {
             _count -= Time.deltaTime;
-            int displayTime = Mathf.FloorToInt(_count);
+            int displayTime = Mathf.CeilToInt(_count);
             timerText.text = displayTime.ToString();
 
             if (_count <= 0)
