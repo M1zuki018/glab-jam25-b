@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         counter.enabled = false;
         isKey = false;
 #if UNITY_EDITOR
-        if(FindAnyObjectByType<SoundManager>() == null)
+        if (FindAnyObjectByType<SoundManager>() == null)
         {
             Instantiate(soundObject);
         }
@@ -71,19 +71,15 @@ public class GameManager : MonoBehaviour
         counter.PushRightHand();
         isKey = false;
         commandInput.enabled = false;
-        if(isCommand)
+        if (!isCommand)
         {
-            characterImpulse.SmouMove(counter.TotalCount, isCommand);
+            counter.TimeUp();
         }
-        else
-        {
-            characterImpulse.SmouMove(0, isCommand);
-        }
-        
+        characterImpulse.SmouMove(counter.TotalCount, isCommand);
     }
     public void result()
     {
         float score = scoreTransformer.GetScore(counter.TotalCount);
-        DOVirtual.DelayedCall(1, () =>resultUI.ScoreView(score));
+        DOVirtual.DelayedCall(1, () => resultUI.ScoreView(score));
     }
 }
