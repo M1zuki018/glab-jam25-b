@@ -22,6 +22,7 @@ public class ResultUI : MonoBehaviour
     [Header("ハイスコアポジション")]
     [SerializeField] float posY;
     [SerializeField] float posX;
+    [SerializeField] Transform[] pos;
 
     [Header("距離に応じた判定の値")]
     [SerializeField] int[] judgment;
@@ -56,7 +57,10 @@ public class ResultUI : MonoBehaviour
         {
             if (score >= judgment[i]&& !isJudgment)
             {
-                arrow.transform.DOMoveY(491f * i,1f).SetEase(Ease.OutBounce);
+                //arrow.transform.DOMoveY(491f * i,1f).SetEase(Ease.OutBounce);
+
+                //追加
+                arrow.transform.DOMove(pos[i].position, 1f).SetEase(Ease.OutBounce);
 
                 Sequence sequence = DOTween.Sequence();
                 sequence.Append(
