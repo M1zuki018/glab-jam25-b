@@ -279,6 +279,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: kiran
       objectReference: {fileID: 0}
+    - target: {fileID: 8650963560526720027, guid: dffe5e9936e95724ab1c3702f881a1ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1665,8 +1669,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c367be7b1ca9540488e88194b8c17446, type: 2}
+  m_sharedMaterial: {fileID: -6715100831318866459, guid: c367be7b1ca9540488e88194b8c17446, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1700,7 +1704,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 12.64
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
