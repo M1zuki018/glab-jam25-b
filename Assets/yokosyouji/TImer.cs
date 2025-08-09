@@ -1,10 +1,12 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
     [SerializeField][Header("タイマー終了後の処理")] private UnityEvent _event;
+    [SerializeField]  TextMeshProUGUI timerText;
     private float _count = 15f;
     private bool _timeActive = false;
 
@@ -20,6 +22,9 @@ public class Timer : MonoBehaviour
         if (_timeActive)
         {
             _count -= Time.deltaTime;
+            int displayTime = Mathf.FloorToInt(_count);
+            timerText.text = displayTime.ToString();
+
             if (_count <= 0)
             {
                 //Debug.Log("Stop");
