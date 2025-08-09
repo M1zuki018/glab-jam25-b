@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class CriticalHit : MonoBehaviour
 {
-    [SerializeField, Header("ヒットの演出")]
-    private GameObject hit;
+    [SerializeField, Header("クリティカルヒットの演出")]
+    private GameObject criticalhit;
     [SerializeField, Header("空振りの演出")]
     private GameObject strikeout;
     // Start is called before the first frame update
     void Start()
     {
-        hit.SetActive(false);
+        criticalhit.SetActive(false);
         strikeout.SetActive(false);
-        hit.GetComponent<SpriteRenderer>().DOFade(1f, 0f);
+        criticalhit.GetComponent<SpriteRenderer>().DOFade(1f, 0f);
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class CriticalHit : MonoBehaviour
         GameObject effectObj = null;
         if (isHit)
         {
-            effectObj = hit;
+            effectObj = criticalhit;
         }
         else
         {
@@ -37,7 +37,7 @@ public class CriticalHit : MonoBehaviour
         Vector3 scale =  effectObj.transform.localScale;
         effectObj.transform.localScale /= 1.5f;
         effectObj.transform.DOScale(scale, 0.2f).SetEase(Ease.OutBounce).SetDelay(0.1f)
-            .OnComplete(() => hit.GetComponent<SpriteRenderer>().DOFade(0f, 1f).SetDelay(0.5f));
+            .OnComplete(() => criticalhit.GetComponent<SpriteRenderer>().DOFade(0f, 1f).SetDelay(0.5f));
 
 
     }
