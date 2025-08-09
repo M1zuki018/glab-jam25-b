@@ -1,0 +1,36 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using DG.Tweening; // © –Y‚ê‚¸‚É
+
+public class ButtonScalerTween : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
+    [Header("ƒJ[ƒ\ƒ‹‚ªG‚ê‚½‚Æ‚«‚É‘å‚«‚­‚·‚é")]
+
+    private float scaleUp = 1.1f;       // Šg‘å”{—¦
+    private float duration = 0.2f;      // ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠÔ
+
+    private Vector3 originalScale;
+    private Tween currentTween;
+
+    private void Start()
+    {
+        originalScale = transform.localScale;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        // Šù‘¶‚ÌTween‚ª‚ ‚ê‚Î~‚ß‚é
+        currentTween?.Kill();
+
+        // Šg‘åTween
+        currentTween = transform.DOScale(originalScale * scaleUp, duration).SetEase(Ease.OutBack);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        // k¬Tween
+        currentTween?.Kill();
+
+        currentTween = transform.DOScale(originalScale, duration).SetEase(Ease.OutBack);
+    }
+}
