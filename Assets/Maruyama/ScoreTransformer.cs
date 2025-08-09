@@ -9,9 +9,9 @@ public class ScoreTransformer : MonoBehaviour
 
     private void Start()
     {
-        var debugCount = 30;
-        var distance = GetScore(debugCount);
-        Debug.Log("SCORE " + distance + " KM");
+        //var debugCount = 30;
+        //var distance = GetScore(debugCount);
+        //Debug.Log("SCORE " + distance + " KM");
     }
 
     public float GetScore(float count)

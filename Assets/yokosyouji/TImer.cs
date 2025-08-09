@@ -4,28 +4,33 @@ using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField]UnityEvent _event;
-    [SerializeField] private float _count = 15f;
-    [SerializeField] private bool _timeActiv = false;
+    [SerializeField][Header("タイマー終了後の処理")] private UnityEvent _event;
+    private float _count = 15f;
+    private bool _timeActive = false;
 
 
     public void TimeStart(int count)
     {
         _count = count;
-        _timeActiv = true;
+        _timeActive = true;
     }
 
     private void Update()
     {
-        if (_timeActiv)
+        if (_timeActive)
         {
             _count -= Time.deltaTime;
             if (_count <= 0)
             {
-                Debug.Log("Stop");
-                _timeActiv=false;
+                //Debug.Log("Stop");
+                _timeActive = false;
                 _event?.Invoke();
             }
         }
+    }
+    public void TimerStop()
+    {
+        _timeActive = false;
+        _count = 0f;
     }
 }

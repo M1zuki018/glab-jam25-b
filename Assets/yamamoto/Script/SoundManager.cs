@@ -4,18 +4,27 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-
+    [System.Serializable]
+    public class soundClip
+    {
+        public AudioClip clip;
+        public string soundName;
+    }
     [Header("SEリスト")]
-    [SerializeField] List<AudioClip> clipList;
+    [SerializeField] List<soundClip> seList;
 
     [Header("BGMリスト")]
-    [SerializeField] List<AudioClip> bgmList;
-
+    [SerializeField] List<soundClip> bgmList;
     private AudioSource audioSource;
 
     void Start()
     {
-        if(instance == null)
+       
+
+    }
+    public void Awake()
+    {
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -24,54 +33,77 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this);
         }
-        
         audioSource = GetComponent<AudioSource>();
+        BGMStop();
+
     }
 
     public void SoundPlay(string soundName)
     {
-        switch (soundName)
+        //Debug.Log(soundName);
+        foreach(soundClip clip in seList)
         {
-            case "張り手_強":
-                audioSource.PlayOneShot(clipList[0]);
-                break;
-
-            case "張り手_弱":
-                audioSource.PlayOneShot(clipList[1]);
-                break;
-
-            case "ぶっ飛ぶ":
-                audioSource.PlayOneShot(clipList[2]);
-                break;
-
-            case "選択":
-                audioSource.PlayOneShot(clipList[3]);
-                break;
-
-            case "勝利":
-                audioSource.PlayOneShot(clipList[4]);
-                break;
-
-            case "敗北":
-                audioSource.PlayOneShot(clipList[4]);
-                break;
+            if(clip.soundName == soundName)
+            {
+                audioSource.PlayOneShot(clip.clip);
+                return;
+            }
         }
+        Debug.LogError("SoundSE ない");
+        //switch (soundName)
+        //{
+        //    case "張り手_強":
+        //        audioSource.PlayOneShot(clipList[0]);
+        //        break;
+
+        //    case "張り手_弱":
+        //        audioSource.PlayOneShot(clipList[1]);
+        //        break;
+
+        //    case "ぶっ飛ぶ":
+        //        audioSource.PlayOneShot(clipList[2]);
+        //        break;
+
+        //    case "選択":
+        //        audioSource.PlayOneShot(clipList[3]);
+        //        break;
+
+        //    case "勝利":
+        //        audioSource.PlayOneShot(clipList[4]);
+        //        break;
+
+        //    case "敗北":
+        //        audioSource.PlayOneShot(clipList[4]);
+        //        break;
+        //}
     }
 
     public void BGMPlay(string bgmName)
     {
-        switch (bgmName)
+        BGMStop();
+        foreach (soundClip clip in bgmList)
         {
-            case "タイトル":
-                audioSource.clip = bgmList[0];
+            if (clip.soundName == bgmName)
+            {
+                audioSource.clip = clip.clip;
+                //audioSource.Stop();
                 audioSource.Play();
-                break;
+                return;
+            }
+       }
+        Debug.LogError("SoundBGM ない");
+        //switch (bgmName)
+        //{
+        //    case "タイトル":
+        //        audioSource.clip = bgmList[0];
+        //        audioSource.Play();
+        //        break;
 
-            case "インゲーム":
-                audioSource.clip = bgmList[1];
-                audioSource.Play();
-                break;
-        }
+        //    case "インゲーム":
+        //        audioSource.clip = bgmList[1];
+        //        audioSource.Play();
+        //        break;
+        //}
     }
 
     public void BGMStop()
