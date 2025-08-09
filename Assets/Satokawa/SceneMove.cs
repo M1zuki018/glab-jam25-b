@@ -6,7 +6,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class SceneMove : MonoBehaviour
 {
+    [SerializeField, Header("フェード時間")]
     public float fadeTime;
+    [SerializeField, Header("フェード用Image フルスクリーンのもの")]
     public Image fadeImage;
     // Start is called before the first frame update
     void Start()
@@ -16,15 +18,7 @@ public class SceneMove : MonoBehaviour
         fadeImage.color = imageColor;
         fadeImage.gameObject.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneMoveLoad("InGame");
-        } 
-    }
+    
     public void SceneMoveLoad(string sceneName)
     {
         fadeImage.gameObject.SetActive(true);

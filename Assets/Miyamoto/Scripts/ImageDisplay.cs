@@ -22,4 +22,8 @@ public class ImageDisplay : MonoBehaviour
     {
         Image.SetActive(false);
     }
+    public void Start()
+    {
+
+    }
 }

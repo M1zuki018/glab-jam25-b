@@ -4,6 +4,8 @@ using DG.Tweening; // ← 忘れずに
 
 public class ButtonScalerTween : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [Header("カーソルが触れたときに大きくする")]
+
     private float scaleUp = 1.1f;       // 拡大倍率
     private float duration = 0.2f;      // アニメーションの時間
 
